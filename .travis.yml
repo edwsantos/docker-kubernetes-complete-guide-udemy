@@ -1,0 +1,11 @@
+sudo: required
+language: generic
+
+services:
+  - docker
+
+before_install:
+  - docker build -t udemy/production-grade-workflow-image -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true udemy/production-grade-workflow-image npm run test -- --coverage
